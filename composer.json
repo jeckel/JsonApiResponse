@@ -18,7 +18,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Jeckel\\JsonApiResponse\\": "tests/"
+      "Tests\\Jeckel\\": "tests/"
     }
   },
   "autoload": {

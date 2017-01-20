@@ -23,5 +23,18 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
         $attributes = new Attributes();
         $attributes->foo = 'bar';
         $this->assertEquals('bar', $attributes->foo);
+
+        $attributes->bar = ['foo' => 'bar'];
+        $this->assertEquals(['foo' => 'bar'], $attributes->bar);
+
+        $expected = ['foo' => 'bar', 'bar' => ['foo' => 'bar']];
+        $this->assertEquals($expected, $attributes->jsonSerialize());
+    }
+
+    public function testConstructor()
+    {
+        $data = ['foo' => 'bar', 'bar' => ['foo' => 'bar']];
+        $attributes = new Attributes($data);
+        $this->assertEquals($data, $attributes->jsonSerialize());
     }
 }
