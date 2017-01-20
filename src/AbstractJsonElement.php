@@ -21,6 +21,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
     {
         foreach($values as $key=>$value) {
             $this->validateKeyValue($key, $value);
+            $values[$key] = $value;
         }
         parent::__construct($values, self::ARRAY_AS_PROPS | self::STD_PROP_LIST);
     }

@@ -23,7 +23,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetWrongId()
     {
@@ -39,7 +39,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetWrongType()
     {
@@ -55,7 +55,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testConstructWithWrongId()
     {
@@ -95,7 +95,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testCreateAttributesWithWrongType()
     {
@@ -103,7 +103,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Jeckel\JsonApiResponse\Exception\RuntimeException
+     * @expectedException \Jeckel\JsonApiResponse\Exception\RuntimeException
      */
     public function testJsonSerializeIsNotValid()
     {
@@ -117,7 +117,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['id' => 'foo', 'type' => 'bar'], $resource->jsonSerialize());
 
         // test with attributes
-        $resource->attributes = ['foo' => 'bar'];
+        $resource->attributes->foo = 'bar';
         $resource->attributes->bar = ['foobar' => 'barbaz'];
 
         $expected = ['id' => 'foo', 'type' => 'bar', 'attributes' => ['foo' => 'bar', 'bar' => ['foobar' => 'barbaz']]];

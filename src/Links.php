@@ -5,29 +5,47 @@
  * Time: 17:26
  */
 
-namespace Jeckel\Scrum\Json;
+namespace Jeckel\JsonApiResponse;
 
-use Jeckel\Scrum\Json\Exception\RuntimeException;
 
-class Links extends \ArrayObject implements JsonElementInterface
+use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
+
+class Links extends AbstractJsonElement
 {
-
     /**
-     * Config constructor.
-     * @param array $values
+     * @param string $key
+     * @param $value
+     * @return mixed
+     * @throws InvalidArgumentException
      */
-    public function __construct(array $values = [])
+    protected function validateKeyValue(string $key, &$value): bool
     {
-        parent::__construct($values, self::ARRAY_AS_PROPS | self::STD_PROP_LIST);
+        if (is_string($value)) {
+            /* @todo : validate if it's an url ? */
+            return true;
+        }
+        if ($value instanceof Link) {
+            return true;
+        }
+        if (is_array($value)) {
+            $value = new Link($value);
+            return true;
+        }
+        throw new InvalidArgumentException("Invalid link provided, expected url / Link object / array");
     }
 
     /**
      * @return array
-     * @throws RuntimeException
      */
-    public function jsonSerialize(): array
+    public function getArrayCopy()
     {
-        return $this->getArrayCopy();
+        $array = parent::getArrayCopy();
+        foreach($array as $key=>$value) {
+            if ($value instanceof Link) {
+                $array[$key] = $value->jsonSerialize();
+            }
+        }
+        return $array;
     }
 
     /**

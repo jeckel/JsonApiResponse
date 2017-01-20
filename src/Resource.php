@@ -21,6 +21,18 @@ class Resource extends AbstractJsonElement
 //    protected $relationships;
 
     /**
+     * Config constructor.
+     * @param array $values
+     */
+    public function __construct(array $values = [])
+    {
+        if (! isset($values['attributes'])) {
+            $values['attributes'] = new Attributes;
+        }
+        parent::__construct($values);
+    }
+
+    /**
      * @param $index
      * @param $value
      * @return bool
@@ -53,29 +65,12 @@ class Resource extends AbstractJsonElement
     }
 
     /**
-     * Returns the value at the specified index
-     * @link http://php.net/manual/en/arrayobject.offsetget.php
-     * @param mixed $index <p>
-     * The index with the value.
-     * </p>
-     * @return mixed The value at the specified index or false.
-     * @since 5.0.0
-     */
-    public function offsetGet($index)
-    {
-        if (! $this->offsetExists($index) && $index == 'attributes') {
-            $this->attributes = new Attributes();
-        }
-        return parent::offsetGet($index);
-    }
-
-    /**
      * @return array
      */
     public function getArrayCopy()
     {
         $array = parent::getArrayCopy();
-        if (! empty($array['attributes']) && count($array['attributes']) > 0) { //&& ! empty($attrs = $this->attributes->jsonSerialize())) {
+        if (count($array['attributes']) > 0) {
             $array['attributes'] = $array['attributes']->jsonSerialize();
         } else {
             unset($array['attributes']);
