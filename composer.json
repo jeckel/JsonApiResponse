@@ -18,12 +18,12 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Tests\\Jeckel\\JsonApiResponse\\": "tests/"
     }
   },
   "autoload": {
     "psr-4": {
-      "Jeckel\\JsonApi\\": "src/"
+      "Jeckel\\JsonApiResponse\\": "src/"
     }
   }
 }

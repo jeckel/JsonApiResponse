@@ -5,9 +5,9 @@
  * Time: 17:34
  */
 
-namespace Jeckel\Scrum\Json;
+namespace Jeckel\JsonApiResponse;
 
-use Jeckel\Scrum\Json\Exception\RuntimeException;
+use Jeckel\JsonApiResponse\Exception\RuntimeException;
 
 /**
  * Interface JsonElementInterface

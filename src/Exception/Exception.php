@@ -5,7 +5,7 @@
  * Time: 17:37
  */
 
-namespace Jeckel\Scrum\Json\Exception;
+namespace Jeckel\JsonApiResponse\Exception;
 
 
 class Exception extends \Exception
