@@ -31,6 +31,14 @@ class MetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $meta->jsonSerialize());
     }
 
+    /**
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
+    public function testAssignWrongAttribute()
+    {
+        new Meta(['foo' => new \stdClass()]);
+    }
+
     public function testConstructor()
     {
         $data = ['foo' => 'bar', 'bar' => ['foo' => 'bar']];
