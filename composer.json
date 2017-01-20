@@ -1,0 +1,29 @@
+{
+  "name": "jeckel/jsonapi-response",
+  "description": "JsonApi Response generator",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Julien Mercier",
+      "email": "jeckel@jeckel.fr"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "^1.0",
+    "phpunit/phpunit": "5.*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Jeckel\\JsonApi\\": "src/"
+    }
+  }
+}
