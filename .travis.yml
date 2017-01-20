@@ -4,18 +4,22 @@ php:
     - 7.0
     - 7.1
 
-before_script:
+install:
     # Start up a web server.
     #- php -S 127.0.0.1:8888 -t /path/to/web/root >/dev/null 2>&1 &
     # Start up the webdriver.
     #- phantomjs --webdriver=4444 >/dev/null 2>&1 &
     # Install Codeception.
     # Doing this last gives the webdriver and server time to start up.
-    - composer install --prefer-source
+    - composer install --prefer-source --no-interaction
+
+before_script:
+    - mkdir -p build/logs
+    - ls -al
 
 script:
 #    - vendor/bin/codecept run --coverage-xml --env travis
-    - vendor/bin/phpunit --coverage-clover .
+    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
     - vendor/bin/coveralls

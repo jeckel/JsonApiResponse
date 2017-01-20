@@ -17,4 +17,11 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
         $attributes = new Attributes();
         $this->assertTrue($attributes->isValid());
     }
+
+    public function testAssignAttributes()
+    {
+        $attributes = new Attributes();
+        $attributes->foo = 'bar';
+        $this->assertEquals('bar', $attributes->foo);
+    }
 }
