@@ -94,15 +94,10 @@ class Resource extends \ArrayObject implements JsonElementInterface
      */
     public function offsetGet($index)
     {
-        if (! in_array($index, self::ALLOWED_KEYS)) {
-            return false;
-        }
-        $value = parent::offsetGet($index);
-        if (! $value && $index == 'attributes') {
+        if (! $this->offsetExists($index) && $index == 'attributes') {
             $this->attributes = new Attributes();
-            return $this->attributes;
         }
-        return $value;
+        return parent::offsetGet($index);
     }
 
     /**

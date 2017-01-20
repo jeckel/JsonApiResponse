@@ -15,10 +15,9 @@ install:
 
 before_script:
     - mkdir -p build/logs
-    - ls -al
+#    - ls -al
 
 script:
-#    - vendor/bin/codecept run --coverage-xml --env travis
     - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
