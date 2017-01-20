@@ -12,35 +12,35 @@ use Jeckel\Scrum\Json\Exception\RuntimeException;
 
 abstract class AbstractDocument extends \ArrayObject implements JsonElementInterface
 {
-    const VALID_KEYS = ['data', 'errors', 'meta', 'links', 'jsonapi', 'included'];
+    const ALLOWED_KEYS = ['data', 'errors', 'meta', 'links', 'jsonapi', 'included'];
 
-    protected $data;
-
-    /**
-     * @var array
-     */
-    protected $errors = [];
-
-    /**
-     * @var Meta
-     */
-    protected $meta;
-
-    /**
-     * @var Links
-     */
-    protected $links;
-
-    /**
-     * @todo replace with the real object
-     * @var JsonElementInterface
-     */
-    protected $jsonapi;
-
-    /**
-     * @var array
-     */
-    protected $included = [];
+//    protected $data;
+//
+//    /**
+//     * @var array
+//     */
+//    protected $errors = [];
+//
+//    /**
+//     * @var Meta
+//     */
+//    protected $meta;
+//
+//    /**
+//     * @var Links
+//     */
+//    protected $links;
+//
+//    /**
+//     * @todo replace with the real object
+//     * @var JsonElementInterface
+//     */
+//    protected $jsonapi;
+//
+//    /**
+//     * @var array
+//     */
+//    protected $included = [];
 
     /**
      * Config constructor.

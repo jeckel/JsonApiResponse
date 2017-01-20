@@ -7,30 +7,27 @@
 
 namespace Jeckel\JsonApiResponse;
 
+use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 use Jeckel\JsonApiResponse\Exception\RuntimeException;
 
 /**
  * Class Attributes
  * @package Jeckel\Scrum\Json
  */
-class Attributes extends \ArrayObject implements JsonElementInterface
+class Attributes extends AbstractJsonElement
 {
     /**
-     * Config constructor.
-     * @param array $values
+     * @param string $key
+     * @param $value
+     * @return mixed
+     * @throws InvalidArgumentException
      */
-    public function __construct(array $values = [])
+    protected function validateKeyValue(string $key, &$value): bool
     {
-        parent::__construct($values, self::ARRAY_AS_PROPS | self::STD_PROP_LIST);
-    }
-
-    /**
-     * @return array
-     * @throws RuntimeException
-     */
-    public function jsonSerialize(): array
-    {
-        return $this->getArrayCopy();
+        if (! is_scalar($value) && ! is_array($value)) {
+            throw new InvalidArgumentException("Value needs to be scalar or array");
+        }
+        return true;
     }
 
     /**

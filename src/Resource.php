@@ -11,7 +11,7 @@ use Jeckel\JsonApiResponse\Exception\Exception;
 use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 use Jeckel\JsonApiResponse\Exception\RuntimeException;
 
-class Resource extends \ArrayObject implements JsonElementInterface
+class Resource extends AbstractJsonElement
 {
     const ALLOWED_KEYS = ['id', 'type', 'attributes', 'relationships'];
 
@@ -21,24 +21,12 @@ class Resource extends \ArrayObject implements JsonElementInterface
 //    protected $relationships;
 
     /**
-     * Config constructor.
-     * @param array $values
-     */
-    public function __construct(array $values = [])
-    {
-        foreach($values as $key=>$value) {
-            $this->validateKeyValue($key, $value);
-        }
-        parent::__construct($values, self::ARRAY_AS_PROPS | self::STD_PROP_LIST);
-    }
-
-    /**
      * @param $index
      * @param $value
      * @return bool
      * @throws Exception
      */
-    protected function validateKeyValue($index, &$value)
+    protected function validateKeyValue(string $index, &$value): bool
     {
         switch($index) {
             case 'id' :
@@ -65,25 +53,6 @@ class Resource extends \ArrayObject implements JsonElementInterface
     }
 
     /**
-     * Sets the value at the specified index to newval
-     * @link http://php.net/manual/en/arrayobject.offsetset.php
-     * @param mixed $index <p>
-     * The index being set.
-     * </p>
-     * @param mixed $newval <p>
-     * The new value for the <i>index</i>.
-     * </p>
-     * @return void
-     * @since 5.0.0
-     */
-    public function offsetSet($index, $newval)
-    {
-        if ($this->validateKeyValue($index, $newval)) {
-            parent::offsetSet($index, $newval);
-        }
-    }
-
-    /**
      * Returns the value at the specified index
      * @link http://php.net/manual/en/arrayobject.offsetget.php
      * @param mixed $index <p>
@@ -102,18 +71,16 @@ class Resource extends \ArrayObject implements JsonElementInterface
 
     /**
      * @return array
-     * @throws RuntimeException
      */
-    public function jsonSerialize(): array
+    public function getArrayCopy()
     {
-        if (! $this->isValid()) {
-            throw new RuntimeException("Can not export not valid element");
+        $array = parent::getArrayCopy();
+        if (! empty($array['attributes']) && count($array['attributes']) > 0) { //&& ! empty($attrs = $this->attributes->jsonSerialize())) {
+            $array['attributes'] = $array['attributes']->jsonSerialize();
+        } else {
+            unset($array['attributes']);
         }
-        $toReturn = ['type' => $this->type, 'id' => $this->id];
-        if (! empty($this->attributes) && ! empty($attrs = $this->attributes->jsonSerialize())) {
-            $toReturn['attributes'] = $attrs;
-        }
-        return $toReturn;
+        return $array;
     }
 
     /**

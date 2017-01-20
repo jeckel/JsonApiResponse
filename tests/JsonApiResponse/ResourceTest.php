@@ -95,6 +95,14 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
+    public function testCreateAttributesWithWrongType()
+    {
+        new Resource(['attributes' => new \stdClass()]);
+    }
+
+    /**
      * @expectedException Jeckel\JsonApiResponse\Exception\RuntimeException
      */
     public function testJsonSerializeIsNotValid()
@@ -114,5 +122,12 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
 
         $expected = ['id' => 'foo', 'type' => 'bar', 'attributes' => ['foo' => 'bar', 'bar' => ['foobar' => 'barbaz']]];
         $this->assertEquals($expected, $resource->jsonSerialize());
+    }
+
+    public function testJsonSerializeWithEmptyAttributes()
+    {
+        $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
+        $this->assertInstanceOf(Attributes::class, $resource->attributes);
+        $this->assertEquals(['id' => 'foo', 'type' => 'bar'], $resource->jsonSerialize());
     }
 }
