@@ -38,7 +38,7 @@ class Link extends AbstractJsonElement
         switch($key) {
             case 'href' :
                 if (! is_string($value)) {
-                    throw new InvalidArgumentException("Invalid format for $value, string expected");
+                    throw new InvalidArgumentException("Invalid format for $key, string expected");
                 }
                 break;
             case 'meta' :

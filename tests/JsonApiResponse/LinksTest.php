@@ -25,6 +25,13 @@ class LinksTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Meta(['foo' => 'bar']), $link->meta);
     }
 
+    public function testSetLink()
+    {
+        $link = new Link(['href' => 'http://foo/bar']);
+        $links = new Links(['self' => $link]);
+        $this->assertSame($link, $links->self);
+    }
+
     /**
      * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */

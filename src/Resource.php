@@ -55,9 +55,9 @@ class Resource extends AbstractJsonElement
                     throw new InvalidArgumentException("Invalid value for 'attribute', array or an Attributes object expected");
                 }
                 break;
-            case 'relationships' :
-                // @Todo : to be implemented
-                throw new Exception("Not implemented yet");
+            // @Todo : to be implemented
+//            case 'relationships' :
+//                throw new Exception("Not implemented yet");
             default:
                 throw new InvalidArgumentException("Invalid index, allowed : 'id', 'type', 'attributes', 'relationships'");
         }

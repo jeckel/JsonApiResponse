@@ -97,6 +97,14 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
+    public function testSetUnknownAttribute()
+    {
+        new Resource(['foo' => 'bar']);
+    }
+
+    /**
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
     public function testCreateAttributesWithWrongType()
     {
         new Resource(['attributes' => new \stdClass()]);

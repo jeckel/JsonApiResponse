@@ -35,6 +35,14 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
+    public function testSetInvalidHref()
+    {
+        new Link(['href' => new \stdClass()]);
+    }
+
+    /**
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
     public function testSetInvalidMeta()
     {
         $link = new Link();
