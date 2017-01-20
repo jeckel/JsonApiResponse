@@ -15,7 +15,7 @@ before_script:
 
 script:
 #    - vendor/bin/codecept run --coverage-xml --env travis
-    - vendor/bin/phpunit --help --coverage-clover .
+    - vendor/bin/phpunit --coverage-clover .
 
 after_script:
     - vendor/bin/coveralls
