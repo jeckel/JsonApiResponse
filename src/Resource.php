@@ -13,12 +13,7 @@ use Jeckel\JsonApiResponse\Exception\RuntimeException;
 
 class Resource extends AbstractJsonElement
 {
-    const ALLOWED_KEYS = ['id', 'type', 'attributes', 'relationships'];
-
-//    /**
-//     * @var Relationships
-//     */
-//    protected $relationships;
+    const ALLOWED_KEYS = ['id', 'type', 'attributes', 'relationships', 'links', 'meta'];
 
     /**
      * Config constructor.
@@ -33,7 +28,7 @@ class Resource extends AbstractJsonElement
     }
 
     /**
-     * @param $index
+     * @param string $index
      * @param $value
      * @return bool
      * @throws Exception
@@ -57,6 +52,10 @@ class Resource extends AbstractJsonElement
                 break;
             // @Todo : to be implemented
 //            case 'relationships' :
+//                throw new Exception("Not implemented yet");
+//            case 'links' :
+//                throw new Exception("Not implemented yet");
+//            case 'meta' :
 //                throw new Exception("Not implemented yet");
             default:
                 throw new InvalidArgumentException("Invalid index, allowed : 'id', 'type', 'attributes', 'relationships'");
