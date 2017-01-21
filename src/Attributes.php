@@ -24,7 +24,7 @@ class Attributes extends AbstractJsonElement
      */
     protected function validateKeyValue(string $key, &$value): bool
     {
-        if (! is_scalar($value) && ! is_array($value)) {
+        if (! is_scalar($value) && ! is_array($value) && ! is_null($value)) {
             throw new InvalidArgumentException("Value needs to be scalar or array");
         }
         return true;

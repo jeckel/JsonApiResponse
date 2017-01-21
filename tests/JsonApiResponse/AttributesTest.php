@@ -53,4 +53,10 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
         $attributes->foo = 'bar';
         $this->assertFalse($attributes->isEmpty());
     }
+
+    public function testNullAttribute()
+    {
+        $attributes = new Attributes(['foo' => null]);
+        $this->assertNull($attributes->foo);
+    }
 }
