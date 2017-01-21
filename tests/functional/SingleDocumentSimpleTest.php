@@ -37,4 +37,20 @@ class SingleDocumentSimpleTest extends \PHPUnit_Framework_TestCase
             $document->toJson()
         );
     }
+
+    public function testFromProperties()
+    {
+        $document = new SingleDocument();
+        $document->links->self = 'http://foo.com/bar/256';
+        $document->data->id = '256';
+        $document->data->type = 'foo-doc-type';
+        $document->data->attributes->foo = 'bar';
+        $document->data->attributes['bar-bar'] = ['bar' => 'bar'];
+
+        $this->assertTrue($document->isValid());
+        $this->assertJsonStringEqualsJsonFile(
+            __DIR__ . '/fixtures/SingleDocumentSimple-FromArray.json',
+            $document->toJson()
+        );
+    }
 }
