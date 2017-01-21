@@ -102,6 +102,28 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['data' => ['foo' => 'bar'], 'meta' => ['bar' => 'baz']], $document->jsonSerialize());
     }
 
+    public function testSetMetaFromArray()
+    {
+        $document = new SingleDocument(['meta' => ['foo' => 'bar']]);
+        $this->assertInstanceOf(Meta::class, $document->meta);
+        $this->assertEquals('bar', $document->meta->foo);
+    }
+
+    public function testSetLinksFromArray()
+    {
+        $document = new SingleDocument(['links' => ['self' => 'http://foo.com/bar']]);
+        $this->assertInstanceOf(Links::class, $document->links);
+        $this->assertEquals('http://foo.com/bar', $document->links->self);
+    }
+
+    public function testSetDataFromArray()
+    {
+        $document = new SingleDocument(['data' => ['id' => 'foo', 'type' => 'bar']]);
+        $this->assertInstanceOf(Resource::class, $document->data);
+        $this->assertEquals('foo', $document->data->id);
+        $this->assertEquals('bar', $document->data->type);
+    }
+
     /**
      * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */

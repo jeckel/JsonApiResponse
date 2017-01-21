@@ -110,4 +110,9 @@ abstract class AbstractDocument extends AbstractJsonElement
         return $this->links->isEmpty() &&
             $this->meta->isEmpty();
     }
+
+    public function toJson(): string
+    {
+        return json_encode($this->getArrayCopy());
+    }
 }
