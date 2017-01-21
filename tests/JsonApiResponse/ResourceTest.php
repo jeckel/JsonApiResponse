@@ -10,6 +10,8 @@ namespace Tests\Jeckel\JsonApiResponse;
 
 use Jeckel\JsonApiResponse\Attributes;
 use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
+use Jeckel\JsonApiResponse\Links;
+use Jeckel\JsonApiResponse\Meta;
 use Jeckel\JsonApiResponse\Resource;
 
 
@@ -85,6 +87,20 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Attributes::class, $attributes);
     }
 
+    public function testGetEmptyLinks()
+    {
+        $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
+        $links = $resource->links;
+        $this->assertInstanceOf(Links::class, $links);
+    }
+
+    public function testGetEmptyMeta()
+    {
+        $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
+        $meta = $resource->meta;
+        $this->assertInstanceOf(Meta::class, $meta);
+    }
+
     public function testCreateAttributesByArray()
     {
         $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
@@ -94,10 +110,28 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $resource->attributes->foo);
     }
 
+    public function testCreateLinksByArray()
+    {
+        $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
+        $data = ['foo' => 'bar'];
+        $resource->links = $data;
+        $this->assertInstanceOf(Links::class, $resource->links);
+        $this->assertEquals('bar', $resource->links->foo);
+    }
+
+    public function testCreateMetaByArray()
+    {
+        $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
+        $data = ['foo' => 'bar'];
+        $resource->meta = $data;
+        $this->assertInstanceOf(Meta::class, $resource->meta);
+        $this->assertEquals('bar', $resource->meta->foo);
+    }
+
     /**
      * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
      */
-    public function testSetUnknownAttribute()
+    public function testSetUnknownProperty()
     {
         new Resource(['foo' => 'bar']);
     }
@@ -108,6 +142,22 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     public function testCreateAttributesWithWrongType()
     {
         new Resource(['attributes' => new \stdClass()]);
+    }
+
+    /**
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
+    public function testCreateLinksWithWrongType()
+    {
+        new Resource(['links' => new \stdClass()]);
+    }
+
+    /**
+     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     */
+    public function testCreateMetaWithWrongType()
+    {
+        new Resource(['meta' => new \stdClass()]);
     }
 
     /**
@@ -124,18 +174,29 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
         $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
         $this->assertEquals(['id' => 'foo', 'type' => 'bar'], $resource->jsonSerialize());
 
-        // test with attributes
+        // test with attributes, links and meta
         $resource->attributes->foo = 'bar';
         $resource->attributes->bar = ['foobar' => 'barbaz'];
+        $resource->meta->bar = 'bar';
+        $resource->meta->foobar = ['foo' => 'bar'];
+        $resource->links->self = 'http://foo.com/bar/256';
 
-        $expected = ['id' => 'foo', 'type' => 'bar', 'attributes' => ['foo' => 'bar', 'bar' => ['foobar' => 'barbaz']]];
+        $expected = [
+            'id' => 'foo',
+            'type' => 'bar',
+            'attributes' => ['foo' => 'bar', 'bar' => ['foobar' => 'barbaz']],
+            'meta' => ['bar' => 'bar', 'foobar' => ['foo' => 'bar']],
+            'links' => ['self' =>  'http://foo.com/bar/256']
+        ];
         $this->assertEquals($expected, $resource->jsonSerialize());
     }
 
-    public function testJsonSerializeWithEmptyAttributes()
+    public function testJsonSerializeWithEmptyAttributesLinksMeta()
     {
         $resource = new Resource(['id' => 'foo', 'type' => 'bar']);
         $this->assertInstanceOf(Attributes::class, $resource->attributes);
+        $this->assertInstanceOf(Links::class, $resource->links);
+        $this->assertInstanceOf(Meta::class, $resource->meta);
         $this->assertEquals(['id' => 'foo', 'type' => 'bar'], $resource->jsonSerialize());
     }
 }

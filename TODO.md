@@ -1,8 +1,6 @@
 # Required
 
 1. Finalize `resource` document :
-    * implement `links`
-    * Implement `meta`
     * Implement `relationships`
 1. Implement `singleDocument`
 1. Implement `collectionDocument`

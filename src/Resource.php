@@ -24,6 +24,12 @@ class Resource extends AbstractJsonElement
         if (! isset($values['attributes'])) {
             $values['attributes'] = new Attributes;
         }
+        if (! isset($values['meta'])) {
+            $values['meta'] = new Meta;
+        }
+        if (! isset($values['links'])) {
+            $values['links'] = new Links;
+        }
         parent::__construct($values);
     }
 
@@ -50,12 +56,24 @@ class Resource extends AbstractJsonElement
                     throw new InvalidArgumentException("Invalid value for 'attribute', array or an Attributes object expected");
                 }
                 break;
+            case 'meta' :
+                if (is_array($value)) {
+                    $value = new Meta($value);
+                }
+                if (! $value instanceof Meta) {
+                    throw new InvalidArgumentException("Invalid value for 'meta', array or a Meta object expected");
+                }
+                break;
+            case 'links' :
+                if (is_array($value)) {
+                    $value = new Links($value);
+                }
+                if (! $value instanceof Links) {
+                    throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
+                }
+                break;
             // @Todo : to be implemented
 //            case 'relationships' :
-//                throw new Exception("Not implemented yet");
-//            case 'links' :
-//                throw new Exception("Not implemented yet");
-//            case 'meta' :
 //                throw new Exception("Not implemented yet");
             default:
                 throw new InvalidArgumentException("Invalid index, allowed : 'id', 'type', 'attributes', 'relationships'");
@@ -73,6 +91,16 @@ class Resource extends AbstractJsonElement
             $array['attributes'] = $array['attributes']->jsonSerialize();
         } else {
             unset($array['attributes']);
+        }
+        if (count($array['meta']) > 0) {
+            $array['meta'] = $array['meta']->jsonSerialize();
+        } else {
+            unset($array['meta']);
+        }
+        if (count($array['links']) > 0) {
+            $array['links'] = $array['links']->jsonSerialize();
+        } else {
+            unset($array['links']);
         }
         return $array;
     }
