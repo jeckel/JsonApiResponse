@@ -2,7 +2,10 @@
 
 1. Finalize `resource` document :
     * Implement `relationships`
-1. Implement `singleDocument`
+1. Finalize  `AbstractDocument` :
+    * Implement `errors`
+    * Implement `jsonapi`
+    * Implement `included`
 1. Implement `collectionDocument`
 1. Implement `error`
 

@@ -5,42 +5,80 @@
  * Time: 17:29
  */
 
-namespace Jeckel\Scrum\Json;
+namespace Jeckel\JsonApiResponse;
 
+
+use Jeckel\JsonApiResponse\Exception\Exception;
+use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 
 class SingleDocument extends AbstractDocument
 {
     /**
-     * @var Resource
+     * Config constructor.
+     * @param array $values
      */
-    protected $data;
-
-    /**
-     * @return Resource
-     */
-    public function getData(): Resource
+    public function __construct(array $values = [])
     {
-        if (empty($this->data)) {
-            $this->data = new Resource();
+        if (! isset($values['data'])) {
+            $values['data'] = new Resource();
         }
-        return $this->data;
+        parent::__construct($values);
     }
 
     /**
-     * @param Resource $data
-     * @return self
+     * @param string $index
+     * @param $value
+     * @return bool
+     * @throws Exception
      */
-    public function setData($data): self
+    protected function validateKeyValue(string $index, &$value): bool
     {
-        $this->data = $data;
-        return $this;
+        if ($index == 'data') {
+            if (is_array($value)) {
+                $value = new Resource($value);
+            }
+            if (!$value instanceof Resource) {
+                throw new InvalidArgumentException("Invalid value for 'data', array or a Resource object expected");
+            }
+        } else {
+            return parent::validateKeyValue($index, $value);
+        }
+        return true;
     }
 
     /**
      * @return array
      */
-    protected function jsonSerializeData(): array
+    public function getArrayCopy()
     {
-        return $this->data->jsonSerialize();
+        $array = parent::getArrayCopy();
+        if (! $this->data->isEmpty()) {
+            $array['data'] = $this->data->jsonSerialize();
+        } else {
+            unset($array['data']);
+        }
+        return $array;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid(): bool
+    {
+        return $this->data->isValid() && parent::isValid();
+    }
+
+    protected function isDataEmpty(): bool
+    {
+        return $this->data->isEmpty();
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->data->isEmpty() && parent::isEmpty();
     }
 }

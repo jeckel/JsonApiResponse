@@ -5,42 +5,14 @@
  * Time: 17:23
  */
 
-namespace Jeckel\Scrum\Json;
+namespace Jeckel\JsonApiResponse;
 
+use Jeckel\JsonApiResponse\Exception\Exception;
+use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 
-use Jeckel\Scrum\Json\Exception\RuntimeException;
-
-abstract class AbstractDocument extends \ArrayObject implements JsonElementInterface
+abstract class AbstractDocument extends AbstractJsonElement
 {
-    const ALLOWED_KEYS = ['data', 'errors', 'meta', 'links', 'jsonapi', 'included'];
-
-//    protected $data;
-//
-//    /**
-//     * @var array
-//     */
-//    protected $errors = [];
-//
-//    /**
-//     * @var Meta
-//     */
-//    protected $meta;
-//
-//    /**
-//     * @var Links
-//     */
-//    protected $links;
-//
-//    /**
-//     * @todo replace with the real object
-//     * @var JsonElementInterface
-//     */
-//    protected $jsonapi;
-//
-//    /**
-//     * @var array
-//     */
-//    protected $included = [];
+//    const ALLOWED_KEYS = ['data', 'errors', 'meta', 'links', 'jsonapi', 'included'];
 
     /**
      * Config constructor.
@@ -48,87 +20,94 @@ abstract class AbstractDocument extends \ArrayObject implements JsonElementInter
      */
     public function __construct(array $values = [])
     {
-        parent::__construct($values, self::ARRAY_AS_PROPS /* | self::STD_PROP_LIST*/);
-    }
-
-    public function offsetSet($index, $newval)
-    {
-        if (! $this->isKeyValid($index)) {
-
+        if (! isset($values['meta'])) {
+            $values['meta'] = new Meta;
         }
-        parent::offsetSet($index, $newval);
-    }
-
-    public function isKeyValid(string $key)
-    {
-        return in_array($key, self::VALID_KEYS);
+        if (! isset($values['links'])) {
+            $values['links'] = new Links;
+        }
+        parent::__construct($values);
     }
 
     /**
-     * @param Links|array $links
-     * @return self
+     * @param string $index
+     * @param $value
+     * @return bool
+     * @throws Exception
      */
-    public function setLinks($links): self
+    protected function validateKeyValue(string $index, &$value): bool
     {
-        if ($links instanceof Links) {
-            $this->links = $links;
+        switch($index) {
+            case 'meta' :
+                if (is_array($value)) {
+                    $value = new Meta($value);
+                }
+                if (! $value instanceof Meta) {
+                    throw new InvalidArgumentException("Invalid value for 'meta', array or a Meta object expected");
+                }
+                break;
+            case 'links' :
+                if (is_array($value)) {
+                    $value = new Links($value);
+                }
+                if (! $value instanceof Links) {
+                    throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
+                }
+                break;
+            // @Todo : to be implemented
+//            case 'data' :
+//            case 'errors' :
+//            case 'jsonapi' :
+//            case 'included' :
+//                throw new Exception("Not implemented yet");
+            default:
+                throw new InvalidArgumentException("Invalid index, allowed : 'data', 'errors', 'meta', 'links', 'jsonapi', 'included'");
+        }
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        $array = parent::getArrayCopy();
+        if (! $this->meta->isEmpty()) {
+            $array['meta'] = $this->meta->jsonSerialize();
         } else {
-            if (empty($this->links)) {
-                $this->links = new Attributes($links);
-            } else {
-                // @todo
-            }
+            unset($array['meta']);
         }
-        return $this;
+        if (! $this->links->isEmpty()) {
+            $array['links'] = $this->links->jsonSerialize();
+        } else {
+            unset($array['links']);
+        }
+        return $array;
     }
-
-    /**
-     * @return Links
-     */
-    public function getLinks(): Links
-    {
-        if (empty($this->links)) {
-            $this->links = new Links();
-        }
-        return $this->links;
-    }
-
-    /**
-     * @return array
-     * @throws RuntimeException
-     */
-    public function jsonSerialize(): array
-    {
-        if (! $this->isValid()) {
-            throw new RuntimeException("Can not export not valid element");
-        }
-        $toReturn = [];
-        if (! empty($this->data)) {
-            $toReturn['data'] = $this->jsonSerializeData();
-        }
-        if (! empty($links = $this->links->jsonSerialize())) {
-            $toReturn['links'] = $links;
-        }
-        // @todo : to be completed
-        return $toReturn;
-    }
-
-    /**
-     * @return array
-     */
-    abstract protected function jsonSerializeData(): array;
 
     /**
      * @return bool
      */
     public function isValid(): bool
     {
-        if (empty($this->data) && empty($this->errors) && empty($this->meta)) {
+        if ($this->isDataEmpty() /*&& empty($this->errors)*/ && $this->meta->isEmpty()) {
             return false;
         }
-        if (empty($this->data) && !empty($this->included)) {
+        /*if (empty($this->data) && !empty($this->included)) {
             return false;
-        }
-        return true;
+        }*/
+        return ($this->links->isEmpty() || $this->links->isValid()) &&
+            ($this->meta->isEmpty() || $this->meta->isValid());
+    }
+
+    abstract protected function isDataEmpty(): bool;
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->links->isEmpty() &&
+            $this->meta->isEmpty();
     }
 }

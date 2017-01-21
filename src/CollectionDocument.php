@@ -5,7 +5,7 @@
  * Time: 17:29
  */
 
-namespace Jeckel\Scrum\Json;
+namespace Jeckel\JsonApiResponse;
 
 
 class CollectionDocument extends AbstractDocument
@@ -15,7 +15,7 @@ class CollectionDocument extends AbstractDocument
      */
     protected $data = [];
 
-    public function add(ResourceIdentifier $resource): self
+    public function add(Resource $resource): self
     {
         $this->collection[] = $resource;
         return $this;
