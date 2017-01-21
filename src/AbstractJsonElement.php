@@ -7,10 +7,13 @@
 
 namespace Jeckel\JsonApiResponse;
 
-
 use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 use Jeckel\JsonApiResponse\Exception\RuntimeException;
 
+/**
+ * Class AbstractJsonElement
+ * @package Jeckel\JsonApiResponse
+ */
 abstract class AbstractJsonElement extends \ArrayObject implements JsonElementInterface
 {
     /**
@@ -59,5 +62,13 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
             throw new RuntimeException("Can not export not valid element");
         }
         return $this->getArrayCopy();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->count() == 0;
     }
 }

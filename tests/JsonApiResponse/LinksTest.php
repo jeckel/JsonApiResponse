@@ -52,4 +52,12 @@ class LinksTest extends \PHPUnit_Framework_TestCase
             $links->jsonSerialize()
         );
     }
+
+    public function testIsEmpty()
+    {
+        $links = new Links();
+        $this->assertTrue($links->isEmpty());
+        $links->foo = 'bar';
+        $this->assertFalse($links->isEmpty());
+    }
 }

@@ -61,8 +61,8 @@ class Link extends AbstractJsonElement
     public function getArrayCopy()
     {
         $array = parent::getArrayCopy();
-        if (count($array['meta']) > 0) {
-            $array['meta'] = $array['meta']->jsonSerialize();
+        if (! $this->meta->isEmpty()) {
+            $array['meta'] = $this->meta->jsonSerialize();
         } else {
             unset($array['meta']);
         }
@@ -76,4 +76,13 @@ class Link extends AbstractJsonElement
     {
         return ! empty($this->href);
     }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->meta->isEmpty() && empty($this->href);
+    }
+
 }

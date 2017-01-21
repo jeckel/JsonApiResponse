@@ -45,4 +45,12 @@ class MetaTest extends \PHPUnit_Framework_TestCase
         $meta = new Meta($data);
         $this->assertEquals($data, $meta->jsonSerialize());
     }
+
+    public function testIsEmpty()
+    {
+        $meta = new Meta();
+        $this->assertTrue($meta->isEmpty());
+        $meta->foo = 'bar';
+        $this->assertFalse($meta->isEmpty());
+    }
 }

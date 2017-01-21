@@ -8,3 +8,4 @@
 
 # Features
 1. If `meta` is empty, return directly the `href` property as a string.
+1. Remove or replace non relevant constant `ALLOWED_KEYS`

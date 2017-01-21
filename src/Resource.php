@@ -87,18 +87,18 @@ class Resource extends AbstractJsonElement
     public function getArrayCopy()
     {
         $array = parent::getArrayCopy();
-        if (count($array['attributes']) > 0) {
-            $array['attributes'] = $array['attributes']->jsonSerialize();
+        if (! $this->attributes->isEmpty()) {
+            $array['attributes'] = $this->attributes->jsonSerialize();
         } else {
             unset($array['attributes']);
         }
-        if (count($array['meta']) > 0) {
-            $array['meta'] = $array['meta']->jsonSerialize();
+        if (! $this->meta->isEmpty()) {
+            $array['meta'] = $this->meta->jsonSerialize();
         } else {
             unset($array['meta']);
         }
-        if (count($array['links']) > 0) {
-            $array['links'] = $array['links']->jsonSerialize();
+        if (! $this->links->isEmpty()) {
+            $array['links'] = $this->links->jsonSerialize();
         } else {
             unset($array['links']);
         }
@@ -111,5 +111,16 @@ class Resource extends AbstractJsonElement
     public function isValid(): bool
     {
         return !empty($this->type) && !empty($this->id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->count() == 3 &&
+            $this->attributes->isEmpty() &&
+            $this->links->isEmpty() &&
+            $this->meta->isEmpty();
     }
 }

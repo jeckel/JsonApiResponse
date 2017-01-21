@@ -45,4 +45,12 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
         $attributes = new Attributes($data);
         $this->assertEquals($data, $attributes->jsonSerialize());
     }
+
+    public function testIsEmpty()
+    {
+        $attributes = new Attributes();
+        $this->assertTrue($attributes->isEmpty());
+        $attributes->foo = 'bar';
+        $this->assertFalse($attributes->isEmpty());
+    }
 }

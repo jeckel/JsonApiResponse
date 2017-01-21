@@ -199,4 +199,12 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Meta::class, $resource->meta);
         $this->assertEquals(['id' => 'foo', 'type' => 'bar'], $resource->jsonSerialize());
     }
+
+    public function testIsEmpty()
+    {
+        $resource = new Resource();
+        $this->assertTrue($resource->isEmpty());
+        $resource->id = 'bar';
+        $this->assertFalse($resource->isEmpty());
+    }
 }

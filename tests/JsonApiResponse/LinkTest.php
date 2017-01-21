@@ -65,4 +65,12 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $link->meta->foo = 'bar';
         $this->assertEquals(['href' => 'http://foo/bar', 'meta' => ['foo' => 'bar']], $link->jsonSerialize());
     }
+
+    public function testIsEmpty()
+    {
+        $link = new Link();
+        $this->assertTrue($link->isEmpty());
+        $link->href = 'http://foo/bar';
+        $this->assertFalse($link->isEmpty());
+    }
 }

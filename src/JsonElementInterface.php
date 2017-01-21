@@ -25,4 +25,9 @@ interface JsonElementInterface
      * @return bool
      */
     public function isValid(): bool;
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool;
 }
