@@ -12,7 +12,8 @@ engines:
       CleanCode/ElseExpression:
         enabled: false
       UnusedFormalParameter:
-        enabled: falseratings:
+        enabled: false
+ratings:
   paths:
     - "**.php"
 exclude_paths:
