@@ -12,20 +12,11 @@ use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 
 class Link extends AbstractJsonElement
 {
-    const ALLOWED_KEYS = ['href', 'meta'];
+//    const ALLOWED_KEYS = ['href', 'meta'];
 
-    /**
-     * Config constructor.
-     * @param array $values
-     */
-    public function __construct(array $values = [])
-    {
-        if (! isset($values['meta'])) {
-            $values['meta'] = new Meta;
-        }
-        parent::__construct($values);
-    }
-
+    protected $default = [
+        'meta'       => [],
+    ];
 
     /**
      * @param string $key

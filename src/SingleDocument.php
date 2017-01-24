@@ -17,18 +17,6 @@ use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 class SingleDocument extends AbstractDocument
 {
     /**
-     * Config constructor.
-     * @param array $values
-     */
-    public function __construct(array $values = [])
-    {
-        if (! isset($values['data'])) {
-            $values['data'] = new Resource();
-        }
-        parent::__construct($values);
-    }
-
-    /**
      * @param string $index
      * @param $value
      * @return bool

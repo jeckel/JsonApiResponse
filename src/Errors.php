@@ -14,21 +14,6 @@ use Jck\JsonApiResponse\Exception\RuntimeException;
 class Errors extends AbstractJsonElement implements JsonElementInterface
 {
     /**
-     * Sets the value at the specified index to newval
-     * @link http://php.net/manual/en/arrayobject.offsetset.php
-     * @param mixed $index
-     * @param mixed $newval
-     * @return void
-     * @throws InvalidArgumentException
-     */
-    public function offsetSet($index, $newval)
-    {
-        if ($this->validateKeyValue($index, $newval)) {
-            parent::offsetSet($index, $newval);
-        }
-    }
-
-    /**
      * @param string $key
      * @param $value
      * @return mixed

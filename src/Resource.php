@@ -13,25 +13,13 @@ use Jck\JsonApiResponse\Exception\RuntimeException;
 
 class Resource extends AbstractJsonElement
 {
-    const ALLOWED_KEYS = ['id', 'type', 'attributes', 'relationships', 'links', 'meta'];
+//    const ALLOWED_KEYS = ['id', 'type', 'attributes', 'relationships', 'links', 'meta'];
 
-    /**
-     * Config constructor.
-     * @param array $values
-     */
-    public function __construct(array $values = [])
-    {
-        if (! isset($values['attributes'])) {
-            $values['attributes'] = new Attributes;
-        }
-        if (! isset($values['meta'])) {
-            $values['meta'] = new Meta;
-        }
-        if (! isset($values['links'])) {
-            $values['links'] = new Links;
-        }
-        parent::__construct($values);
-    }
+    protected $default = [
+        'attributes' => [],
+        'meta'       => [],
+        'links'      => []
+    ];
 
     /**
      * @param string $index

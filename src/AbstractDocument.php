@@ -14,23 +14,12 @@ abstract class AbstractDocument extends AbstractJsonElement
 {
 //    const ALLOWED_KEYS = ['data', 'errors', 'meta', 'links', 'jsonapi', 'included'];
 
-    /**
-     * Config constructor.
-     * @param array $values
-     */
-    public function __construct(array $values = [])
-    {
-        if (! isset($values['meta'])) {
-            $values['meta'] = new Meta;
-        }
-        if (! isset($values['errors'])) {
-            $values['errors'] = new Errors();
-        }
-        if (! isset($values['links'])) {
-            $values['links'] = new Links;
-        }
-        parent::__construct($values);
-    }
+    protected $default = [
+        'errors' => [],
+        'meta'   => [],
+        'links'  => [],
+        'data'   => []
+    ];
 
     /**
      * @param string $index

@@ -16,13 +16,16 @@ use Jck\JsonApiResponse\Exception\RuntimeException;
  */
 abstract class AbstractJsonElement extends \ArrayObject implements JsonElementInterface
 {
+    protected $default = [];
+
     /**
      * Config constructor.
      * @param array $values
      */
     public function __construct(array $values = [])
     {
-        foreach($values as $key=>$value) {
+        $values = array_replace($this->default, $values);
+        foreach ($values as $key=>$value) {
             $this->validateKeyValue($key, $value);
             $values[$key] = $value;
         }
@@ -32,7 +35,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
     /**
      * @param string $key
      * @param $value
-     * @return mixed
+     * @return boolean
      * @throws InvalidArgumentException
      */
     abstract protected function validateKeyValue(string $key, &$value): bool;
@@ -47,7 +50,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
         if (is_array($value)) {
             $value = new Meta($value);
         }
-        if (! $value instanceof Meta) {
+        if (!$value instanceof Meta) {
             throw new InvalidArgumentException("Invalid value for 'meta', array or a Meta object expected");
         }
         return true;
@@ -62,7 +65,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
         if (is_array($value)) {
             $value = new Links($value);
         }
-        if (! $value instanceof Links) {
+        if (!$value instanceof Links) {
             throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
         }
         return true;
@@ -77,7 +80,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
         if (is_array($value)) {
             $value = new Errors($value);
         }
-        if (! $value instanceof Errors) {
+        if (!$value instanceof Errors) {
             throw new InvalidArgumentException("Invalid value for 'errors', array of Errors object expected");
         }
         return true;
@@ -92,7 +95,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
         if (is_array($value)) {
             $value = new Attributes($value);
         }
-        if (! $value instanceof Attributes) {
+        if (!$value instanceof Attributes) {
             throw new InvalidArgumentException("Invalid value for 'attribute', array or an Attributes object expected");
         }
         return true;
