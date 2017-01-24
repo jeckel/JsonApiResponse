@@ -65,6 +65,30 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
     }
 
     /**
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return array_map(
+            function (&$v) {
+                if ($v instanceof JsonElementInterface) {
+                    return $v->jsonSerialize();
+                }
+                return $v;
+            },
+            array_filter(
+                parent::getArrayCopy(),
+                function($v) {
+                    if ($v instanceof JsonElementInterface) {
+                        return !$v->isEmpty();
+                    }
+                    return true;
+                }
+            )
+        );
+    }
+
+    /**
      * @return bool
      */
     public function isEmpty(): bool

@@ -9,6 +9,7 @@
 namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
 
+use Jck\JsonApiResponse\Errors;
 use Jck\JsonApiResponse\Links;
 use Jck\JsonApiResponse\Meta;
 use Jck\JsonApiResponse\Resource;
@@ -100,6 +101,28 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($document->isEmpty());
         $this->assertTrue($document->isValid());
         $this->assertEquals(['data' => ['foo' => 'bar'], 'meta' => ['bar' => 'baz']], $document->jsonSerialize());
+    }
+
+    public function testWithErrors()
+    {
+        $errorsInvalid = $this->createMock(Errors::class);
+        $errorsInvalid->expects($this->any())->method('isValid')->willReturn(false);
+
+        $document = new SingleDocument(['errors' => $errorsInvalid]);
+        $this->assertSame($errorsInvalid, $document->errors);
+        $this->assertSame($errorsInvalid, $document['errors']);
+        $this->assertFalse($document->isEmpty());
+        $this->assertFalse($document->isValid());
+
+        $errorsValid = $this->createMock(Errors::class);
+        $errorsValid->expects($this->any())->method('isValid')->willReturn(true);
+        $errorsValid->expects($this->any())->method('isEmpty')->willReturn(false);
+        $errorsValid->expects($this->any())->method('jsonSerialize')->willReturn([['bar' => 'baz']]);
+
+        $document->errors = $errorsValid;
+        $this->assertFalse($document->isEmpty());
+        $this->assertTrue($document->isValid());
+        $this->assertEquals(['errors' => [['bar' => 'baz']]], $document->jsonSerialize());
     }
 
     public function testSetMetaFromArray()

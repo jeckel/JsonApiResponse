@@ -56,20 +56,6 @@ class Link extends AbstractJsonElement
     }
 
     /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $array = parent::getArrayCopy();
-        if (! $this->meta->isEmpty()) {
-            $array['meta'] = $this->meta->jsonSerialize();
-        } else {
-            unset($array['meta']);
-        }
-        return $array;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool

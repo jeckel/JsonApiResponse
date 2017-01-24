@@ -26,6 +26,9 @@ abstract class AbstractDocument extends AbstractJsonElement
         if (! isset($values['links'])) {
             $values['links'] = new Links;
         }
+        if (! isset($values['errors'])) {
+            $values['errors'] = new Errors();
+        }
         parent::__construct($values);
     }
 
@@ -54,9 +57,15 @@ abstract class AbstractDocument extends AbstractJsonElement
                     throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
                 }
                 break;
+            case 'errors' :
+                if (is_array($value)) {
+                    $value = new Errors($value);
+                }
+                if (! $value instanceof Errors) {
+                    throw new InvalidArgumentException("Invalid value for 'errors', array of Errors object expected");
+                }
+                break;
             // @Todo : to be implemented
-//            case 'data' :
-//            case 'errors' :
 //            case 'jsonapi' :
 //            case 'included' :
 //                throw new Exception("Not implemented yet");
@@ -67,39 +76,24 @@ abstract class AbstractDocument extends AbstractJsonElement
     }
 
     /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $array = parent::getArrayCopy();
-        if (! $this->meta->isEmpty()) {
-            $array['meta'] = $this->meta->jsonSerialize();
-        } else {
-            unset($array['meta']);
-        }
-        if (! $this->links->isEmpty()) {
-            $array['links'] = $this->links->jsonSerialize();
-        } else {
-            unset($array['links']);
-        }
-        return $array;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool
     {
-        if ($this->isDataEmpty() /*&& empty($this->errors)*/ && $this->meta->isEmpty()) {
+        if ($this->isDataEmpty() && $this->errors->isEmpty() && $this->meta->isEmpty()) {
             return false;
         }
         /*if (empty($this->data) && !empty($this->included)) {
             return false;
         }*/
         return ($this->links->isEmpty() || $this->links->isValid()) &&
-            ($this->meta->isEmpty() || $this->meta->isValid());
+            ($this->meta->isEmpty() || $this->meta->isValid()) &&
+            ($this->errors->isEmpty() || $this->errors->isValid());
     }
 
+    /**
+     * @return bool
+     */
     abstract protected function isDataEmpty(): bool;
 
     /**
@@ -108,9 +102,13 @@ abstract class AbstractDocument extends AbstractJsonElement
     public function isEmpty(): bool
     {
         return $this->links->isEmpty() &&
-            $this->meta->isEmpty();
+            $this->meta->isEmpty() &&
+            $this->errors->isEmpty();
     }
 
+    /**
+     * @return string
+     */
     public function toJson(): string
     {
         return json_encode($this->getArrayCopy());

@@ -82,30 +82,6 @@ class Resource extends AbstractJsonElement
     }
 
     /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $array = parent::getArrayCopy();
-        if (! $this->attributes->isEmpty()) {
-            $array['attributes'] = $this->attributes->jsonSerialize();
-        } else {
-            unset($array['attributes']);
-        }
-        if (! $this->meta->isEmpty()) {
-            $array['meta'] = $this->meta->jsonSerialize();
-        } else {
-            unset($array['meta']);
-        }
-        if (! $this->links->isEmpty()) {
-            $array['links'] = $this->links->jsonSerialize();
-        } else {
-            unset($array['links']);
-        }
-        return $array;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool

@@ -35,20 +35,6 @@ class Links extends AbstractJsonElement
     }
 
     /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $array = parent::getArrayCopy();
-        foreach($array as $key=>$value) {
-            if ($value instanceof Link) {
-                $array[$key] = $value->jsonSerialize();
-            }
-        }
-        return $array;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool

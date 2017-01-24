@@ -50,25 +50,11 @@ class SingleDocument extends AbstractDocument
     }
 
     /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $array = parent::getArrayCopy();
-        if (! $this->data->isEmpty()) {
-            $array['data'] = $this->data->jsonSerialize();
-        } else {
-            unset($array['data']);
-        }
-        return $array;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool
     {
-        return $this->data->isValid() && parent::isValid();
+        return ($this->data->isEmpty() || $this->data->isValid()) && parent::isValid();
     }
 
     /**
