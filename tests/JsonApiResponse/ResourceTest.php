@@ -5,14 +5,14 @@
  * Time: 15:56
  */
 
-namespace Tests\Jeckel\JsonApiResponse;
+namespace Tests\Jck\JsonApiResponse;
 
 
-use Jeckel\JsonApiResponse\Attributes;
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
-use Jeckel\JsonApiResponse\Links;
-use Jeckel\JsonApiResponse\Meta;
-use Jeckel\JsonApiResponse\Resource;
+use Jck\JsonApiResponse\Attributes;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Links;
+use Jck\JsonApiResponse\Meta;
+use Jck\JsonApiResponse\Resource;
 
 
 class ResourceTest extends \PHPUnit_Framework_TestCase
@@ -25,7 +25,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetWrongId()
     {
@@ -41,7 +41,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetWrongType()
     {
@@ -57,7 +57,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testConstructWithWrongId()
     {
@@ -129,7 +129,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetUnknownProperty()
     {
@@ -137,7 +137,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testCreateAttributesWithWrongType()
     {
@@ -145,7 +145,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testCreateLinksWithWrongType()
     {
@@ -153,7 +153,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testCreateMetaWithWrongType()
     {
@@ -161,7 +161,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\RuntimeException
+     * @expectedException \Jck\JsonApiResponse\Exception\RuntimeException
      */
     public function testJsonSerializeIsNotValid()
     {

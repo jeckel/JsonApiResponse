@@ -5,11 +5,11 @@
  * Time: 17:55
  */
 
-namespace Tests\Jeckel\JsonApiResponse\JsonApiResponse;
+namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
 
-use Jeckel\JsonApiResponse\Link;
-use Jeckel\JsonApiResponse\Meta;
+use Jck\JsonApiResponse\Link;
+use Jck\JsonApiResponse\Meta;
 
 
 class LinkTest extends \PHPUnit_Framework_TestCase
@@ -24,7 +24,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidParams()
     {
@@ -33,7 +33,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidHref()
     {
@@ -41,7 +41,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidMeta()
     {
@@ -50,7 +50,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\RuntimeException
+     * @expectedException \Jck\JsonApiResponse\Exception\RuntimeException
      */
     public function testIsNotValid()
     {

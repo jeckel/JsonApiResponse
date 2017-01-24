@@ -5,7 +5,7 @@
  * Time: 17:29
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
 
 class CollectionDocument extends AbstractDocument

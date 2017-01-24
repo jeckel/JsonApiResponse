@@ -5,7 +5,7 @@
  * Time: 17:37
  */
 
-namespace Jeckel\JsonApiResponse\Exception;
+namespace Jck\JsonApiResponse\Exception;
 
 interface ExceptionInterface
 {

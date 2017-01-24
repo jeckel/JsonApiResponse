@@ -5,7 +5,7 @@
  * Time: 17:00
  */
 
-namespace Jeckel\JsonApiResponse\Exception;
+namespace Jck\JsonApiResponse\Exception;
 
 
 class Exception extends \Exception implements ExceptionInterface

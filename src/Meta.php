@@ -5,9 +5,9 @@
  * Time: 17:24
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 
 class Meta extends AbstractJsonElement
 {

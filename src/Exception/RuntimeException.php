@@ -5,7 +5,7 @@
  * Time: 17:38
  */
 
-namespace Jeckel\JsonApiResponse\Exception;
+namespace Jck\JsonApiResponse\Exception;
 
 
 class RuntimeException extends \RuntimeException implements ExceptionInterface

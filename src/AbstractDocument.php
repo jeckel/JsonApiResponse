@@ -5,10 +5,10 @@
  * Time: 17:23
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Exception\Exception;
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Exception\Exception;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 
 abstract class AbstractDocument extends AbstractJsonElement
 {

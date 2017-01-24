@@ -6,13 +6,13 @@
  * Time: 17:17
  */
 
-namespace Tests\Jeckel\JsonApiResponse\JsonApiResponse;
+namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
 
-use Jeckel\JsonApiResponse\Links;
-use Jeckel\JsonApiResponse\Meta;
-use Jeckel\JsonApiResponse\Resource;
-use Jeckel\JsonApiResponse\SingleDocument;
+use Jck\JsonApiResponse\Links;
+use Jck\JsonApiResponse\Meta;
+use Jck\JsonApiResponse\Resource;
+use Jck\JsonApiResponse\SingleDocument;
 
 
 class SingleDocumentTest extends \PHPUnit_Framework_TestCase
@@ -125,7 +125,7 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidKey()
     {
@@ -133,7 +133,7 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidMeta()
     {
@@ -141,7 +141,7 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidLinks()
     {
@@ -149,7 +149,7 @@ class SingleDocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetInvalidData()
     {

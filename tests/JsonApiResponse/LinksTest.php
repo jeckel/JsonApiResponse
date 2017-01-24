@@ -5,12 +5,12 @@
  * Time: 18:19
  */
 
-namespace Tests\Jeckel\JsonApiResponse\JsonApiResponse;
+namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
 
-use Jeckel\JsonApiResponse\Link;
-use Jeckel\JsonApiResponse\Links;
-use Jeckel\JsonApiResponse\Meta;
+use Jck\JsonApiResponse\Link;
+use Jck\JsonApiResponse\Links;
+use Jck\JsonApiResponse\Meta;
 
 
 class LinksTest extends \PHPUnit_Framework_TestCase
@@ -33,7 +33,7 @@ class LinksTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testSetWrongValue()
     {

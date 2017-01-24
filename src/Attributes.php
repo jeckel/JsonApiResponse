@@ -5,14 +5,14 @@
  * Time: 17:46
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
-use Jeckel\JsonApiResponse\Exception\RuntimeException;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Exception\RuntimeException;
 
 /**
  * Class Attributes
- * @package Jeckel\Scrum\Json
+ * @package Jck\Scrum\Json
  */
 class Attributes extends AbstractJsonElement
 {

@@ -5,7 +5,7 @@
  * Time: 16:29
  */
 
-namespace Jeckel\JsonApiResponse\Exception;
+namespace Jck\JsonApiResponse\Exception;
 
 
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface

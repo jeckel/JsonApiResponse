@@ -5,9 +5,9 @@
  * Time: 15:33
  */
 
-namespace Tests\Jeckel\JsonApiResponse;
+namespace Tests\Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Attributes;
+use Jck\JsonApiResponse\Attributes;
 
 
 class AttributesTest extends \PHPUnit_Framework_TestCase
@@ -32,7 +32,7 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Jeckel\JsonApiResponse\Exception\InvalidArgumentException
+     * @expectedException \Jck\JsonApiResponse\Exception\InvalidArgumentException
      */
     public function testAssignWrongAttribute()
     {

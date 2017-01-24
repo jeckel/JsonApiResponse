@@ -5,10 +5,10 @@
  * Time: 17:47
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
 
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 
 class Link extends AbstractJsonElement
 {

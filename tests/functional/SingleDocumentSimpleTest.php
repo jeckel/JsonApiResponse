@@ -6,9 +6,9 @@
  * Time: 10:39
  */
 
-namespace Tests\Jeckel\JsonApiResponse\functional;
+namespace Tests\Jck\JsonApiResponse\functional;
 
-use Jeckel\JsonApiResponse\SingleDocument;
+use Jck\JsonApiResponse\SingleDocument;
 
 class SingleDocumentSimpleTest extends \PHPUnit_Framework_TestCase
 {

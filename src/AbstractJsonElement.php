@@ -5,14 +5,14 @@
  * Time: 17:12
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
-use Jeckel\JsonApiResponse\Exception\RuntimeException;
+use Jck\JsonApiResponse\Exception\InvalidArgumentException;
+use Jck\JsonApiResponse\Exception\RuntimeException;
 
 /**
  * Class AbstractJsonElement
- * @package Jeckel\JsonApiResponse
+ * @package Jck\JsonApiResponse
  */
 abstract class AbstractJsonElement extends \ArrayObject implements JsonElementInterface
 {

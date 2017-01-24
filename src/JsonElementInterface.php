@@ -5,13 +5,13 @@
  * Time: 17:34
  */
 
-namespace Jeckel\JsonApiResponse;
+namespace Jck\JsonApiResponse;
 
-use Jeckel\JsonApiResponse\Exception\RuntimeException;
+use Jck\JsonApiResponse\Exception\RuntimeException;
 
 /**
  * Interface JsonElementInterface
- * @package Jeckel\Scrum\Json
+ * @package Jck\Scrum\Json
  */
 interface JsonElementInterface
 {
