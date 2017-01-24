@@ -49,28 +49,13 @@ class Resource extends AbstractJsonElement
                 }
                 break;
             case 'attributes' :
-                if (is_array($value)) {
-                    $value = new Attributes($value);
-                }
-                if (! $value instanceof Attributes) {
-                    throw new InvalidArgumentException("Invalid value for 'attribute', array or an Attributes object expected");
-                }
+                return $this->validateAttributes($value);
                 break;
             case 'meta' :
-                if (is_array($value)) {
-                    $value = new Meta($value);
-                }
-                if (! $value instanceof Meta) {
-                    throw new InvalidArgumentException("Invalid value for 'meta', array or a Meta object expected");
-                }
+                return $this->validateMeta($value);
                 break;
             case 'links' :
-                if (is_array($value)) {
-                    $value = new Links($value);
-                }
-                if (! $value instanceof Links) {
-                    throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
-                }
+                return $this->validateLinks($value);
                 break;
             // @Todo : to be implemented
 //            case 'relationships' :

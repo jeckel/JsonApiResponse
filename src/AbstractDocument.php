@@ -42,28 +42,12 @@ abstract class AbstractDocument extends AbstractJsonElement
     {
         switch($index) {
             case 'meta' :
-                if (is_array($value)) {
-                    $value = new Meta($value);
-                }
-                if (! $value instanceof Meta) {
-                    throw new InvalidArgumentException("Invalid value for 'meta', array or a Meta object expected");
-                }
-                break;
+                return $this->validateMeta($value);
             case 'links' :
-                if (is_array($value)) {
-                    $value = new Links($value);
-                }
-                if (! $value instanceof Links) {
-                    throw new InvalidArgumentException("Invalid value for 'links', array or a Links object expected");
-                }
+                return $this->validateLinks($value);
                 break;
             case 'errors' :
-                if (is_array($value)) {
-                    $value = new Errors($value);
-                }
-                if (! $value instanceof Errors) {
-                    throw new InvalidArgumentException("Invalid value for 'errors', array of Errors object expected");
-                }
+                return $this->validateErrors($value);
                 break;
             // @Todo : to be implemented
 //            case 'jsonapi' :
@@ -107,10 +91,12 @@ abstract class AbstractDocument extends AbstractJsonElement
     }
 
     /**
+     * @param int $options
+     * @param int $depth
      * @return string
      */
-    public function toJson(): string
+    public function jsonEncode(int $options = 0, int $depth = 512): string
     {
-        return json_encode($this->getArrayCopy());
+        return json_encode($this->jsonSerialize(), $options, $depth);
     }
 }

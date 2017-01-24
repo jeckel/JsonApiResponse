@@ -34,7 +34,7 @@ class SingleDocumentSimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($document->isValid());
         $this->assertJsonStringEqualsJsonFile(
             __DIR__ . '/fixtures/SingleDocumentSimple-FromArray.json',
-            $document->toJson()
+            $document->jsonEncode()
         );
     }
 
@@ -50,7 +50,7 @@ class SingleDocumentSimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($document->isValid());
         $this->assertJsonStringEqualsJsonFile(
             __DIR__ . '/fixtures/SingleDocumentSimple-FromArray.json',
-            $document->toJson()
+            $document->jsonEncode()
         );
     }
 }

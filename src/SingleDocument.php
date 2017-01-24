@@ -72,14 +72,4 @@ class SingleDocument extends AbstractDocument
     {
         return $this->data->isEmpty() && parent::isEmpty();
     }
-
-    /**
-     * @param int $options
-     * @param int $depth
-     * @return string
-     */
-    public function json_encode(int $options = 0, int $depth = 512): string
-    {
-        return json_encode($this->jsonSerialize(), $options, $depth);
-    }
 }
