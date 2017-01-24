@@ -56,7 +56,6 @@ abstract class AbstractDocument extends AbstractJsonElement
             default:
                 throw new InvalidArgumentException("Invalid index, allowed : 'data', 'errors', 'meta', 'links', 'jsonapi', 'included'");
         }
-        return true;
     }
 
     /**

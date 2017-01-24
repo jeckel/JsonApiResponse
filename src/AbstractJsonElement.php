@@ -135,7 +135,7 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
                 if ($value instanceof JsonElementInterface) {
                     return $value->jsonSerialize();
                 }
-                return $v;
+                return $value;
             },
             array_filter(
                 parent::getArrayCopy(),
