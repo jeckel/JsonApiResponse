@@ -5,10 +5,9 @@
  * Time: 17:24
  */
 
-namespace Jck\Scrum\Json;
+namespace Jck\JsonApiResponse;
 
-
-use Jck\JsonApiResponse\AbstractJsonElement;
+use Jck\JsonApiResponse\Exception\Exception;
 use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 
 /**
@@ -27,7 +26,9 @@ class Error extends AbstractJsonElement
     {
         switch ($index) {
             case 'status' :
-                // test it's 4xx or 5xx
+                if (! is_int($value) || $value < 400 || $value >= 600) {
+                    throw new InvalidArgumentException("Field $index should be a between 400 and 599");
+                }
                 break;
             case 'title' :
             case 'detail' :
