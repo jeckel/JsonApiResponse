@@ -7,10 +7,13 @@
 
 namespace Jeckel\JsonApiResponse;
 
-
 use Jeckel\JsonApiResponse\Exception\Exception;
 use Jeckel\JsonApiResponse\Exception\InvalidArgumentException;
 
+/**
+ * Class SingleDocument
+ * @package Jeckel\JsonApiResponse
+ */
 class SingleDocument extends AbstractDocument
 {
     /**
@@ -68,11 +71,13 @@ class SingleDocument extends AbstractDocument
         return $this->data->isValid() && parent::isValid();
     }
 
+    /**
+     * @return bool
+     */
     protected function isDataEmpty(): bool
     {
         return $this->data->isEmpty();
     }
-
 
     /**
      * @return bool
@@ -80,5 +85,15 @@ class SingleDocument extends AbstractDocument
     public function isEmpty(): bool
     {
         return $this->data->isEmpty() && parent::isEmpty();
+    }
+
+    /**
+     * @param int $options
+     * @param int $depth
+     * @return string
+     */
+    public function json_encode(int $options = 0, int $depth = 512): string
+    {
+        return json_encode($this->jsonSerialize(), $options, $depth);
     }
 }

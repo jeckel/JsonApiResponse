@@ -10,14 +10,5 @@ namespace Jeckel\JsonApiResponse;
 
 class CollectionDocument extends AbstractDocument
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
 
-    public function add(Resource $resource): self
-    {
-        $this->collection[] = $resource;
-        return $this;
-    }
 }

@@ -4,6 +4,13 @@ php:
     - 7.0
     - 7.1
 
+notifications:
+  email:
+    recipients:
+      - devci@j3ck3l.me
+    on_success: change # default: change
+    on_failure: always # default: always
+
 install:
     # Start up a web server.
     #- php -S 127.0.0.1:8888 -t /path/to/web/root >/dev/null 2>&1 &
