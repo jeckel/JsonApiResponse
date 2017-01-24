@@ -23,11 +23,11 @@ abstract class AbstractDocument extends AbstractJsonElement
         if (! isset($values['meta'])) {
             $values['meta'] = new Meta;
         }
-        if (! isset($values['links'])) {
-            $values['links'] = new Links;
-        }
         if (! isset($values['errors'])) {
             $values['errors'] = new Errors();
+        }
+        if (! isset($values['links'])) {
+            $values['links'] = new Links;
         }
         parent::__construct($values);
     }

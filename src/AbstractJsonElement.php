@@ -83,6 +83,10 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
         return true;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function validateAttributes(&$value): bool
     {
         if (is_array($value)) {
@@ -127,17 +131,17 @@ abstract class AbstractJsonElement extends \ArrayObject implements JsonElementIn
     public function getArrayCopy()
     {
         return array_map(
-            function (&$v) {
-                if ($v instanceof JsonElementInterface) {
-                    return $v->jsonSerialize();
+            function (&$value) {
+                if ($value instanceof JsonElementInterface) {
+                    return $value->jsonSerialize();
                 }
                 return $v;
             },
             array_filter(
                 parent::getArrayCopy(),
-                function($v) {
-                    if ($v instanceof JsonElementInterface) {
-                        return !$v->isEmpty();
+                function($value) {
+                    if ($value instanceof JsonElementInterface) {
+                        return !$value->isEmpty();
                     }
                     return true;
                 }
