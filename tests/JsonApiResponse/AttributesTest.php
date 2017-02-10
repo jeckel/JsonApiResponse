@@ -7,10 +7,11 @@
 
 namespace Tests\Jck\JsonApiResponse;
 
+use PHPUnit\Framework\TestCase;
 use Jck\JsonApiResponse\Attributes;
 
 
-class AttributesTest extends \PHPUnit_Framework_TestCase
+class AttributesTest extends TestCase
 {
     public function testIsValid()
     {

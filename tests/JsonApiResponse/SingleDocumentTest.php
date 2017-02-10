@@ -8,15 +8,14 @@
 
 namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
-
 use Jck\JsonApiResponse\Errors;
 use Jck\JsonApiResponse\Links;
 use Jck\JsonApiResponse\Meta;
 use Jck\JsonApiResponse\Resource;
 use Jck\JsonApiResponse\SingleDocument;
+use PHPUnit\Framework\TestCase;
 
-
-class SingleDocumentTest extends \PHPUnit_Framework_TestCase
+class SingleDocumentTest extends TestCase
 {
     public function testConstruct()
     {

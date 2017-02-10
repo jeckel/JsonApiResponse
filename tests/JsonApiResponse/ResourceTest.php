@@ -7,15 +7,14 @@
 
 namespace Tests\Jck\JsonApiResponse;
 
-
 use Jck\JsonApiResponse\Attributes;
 use Jck\JsonApiResponse\Exception\InvalidArgumentException;
 use Jck\JsonApiResponse\Links;
 use Jck\JsonApiResponse\Meta;
 use Jck\JsonApiResponse\Resource;
+use PHPUnit\Framework\TestCase;
 
-
-class ResourceTest extends \PHPUnit_Framework_TestCase
+class ResourceTest extends TestCase
 {
     public function testSetId()
     {

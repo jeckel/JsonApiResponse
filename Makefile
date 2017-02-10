@@ -1,10 +1,12 @@
 .PHONY: install update test
 
 install:
-	docker run --rm -i -v `pwd`:/project jeckel/composer --ignore-platform-reqs install
+	@if [ $(shell docker volume ls | grep composer-home | wc -l) -eq 0 ] ; then docker volume create --name composer-home ; fi
+	@docker run --rm -i -v `pwd`:/project -v composer-home:/composer jeckel/composer --ignore-platform-reqs install
 
 update:
-	docker run --rm -i -v `pwd`:/project jeckel/composer --ignore-platform-reqs update
+	@if [ $(shell docker volume ls | grep composer-home | wc -l) -eq 0 ] ; then docker volume create --name composer-home ; fi
+	@docker run --rm -i -v `pwd`:/project -v composer-home:/composer jeckel/composer --ignore-platform-reqs update
 
 test:
-	docker run -i --rm -v `pwd`:/project jeckel/phpunit
+	@docker run -it --rm -v `pwd`:/project jeckel/phpunit

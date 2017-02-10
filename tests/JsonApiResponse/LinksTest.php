@@ -7,13 +7,12 @@
 
 namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
-
 use Jck\JsonApiResponse\Link;
 use Jck\JsonApiResponse\Links;
 use Jck\JsonApiResponse\Meta;
+use PHPUnit\Framework\TestCase;
 
-
-class LinksTest extends \PHPUnit_Framework_TestCase
+class LinksTest extends TestCase
 {
     public function testConstruct()
     {

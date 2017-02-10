@@ -8,9 +8,9 @@
 namespace Tests\Jck\JsonApiResponse;
 
 use Jck\JsonApiResponse\Meta;
+use PHPUnit\Framework\TestCase;
 
-
-class MetaTest extends \PHPUnit_Framework_TestCase
+class MetaTest extends TestCase
 {
     public function testIsValid()
     {

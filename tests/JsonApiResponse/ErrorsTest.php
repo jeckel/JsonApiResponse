@@ -9,8 +9,9 @@ namespace Tests\Jck\JsonApiResponse\JsonApiResponse;
 
 use Jck\JsonApiResponse\Error;
 use Jck\JsonApiResponse\Errors;
+use PHPUnit\Framework\TestCase;
 
-class ErrorsTest extends \PHPUnit_Framework_TestCase
+class ErrorsTest extends TestCase
 {
     public function testConstruct()
     {
