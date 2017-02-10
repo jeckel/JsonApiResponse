@@ -9,8 +9,9 @@
 namespace Tests\Jck\JsonApiResponse\functional;
 
 use Jck\JsonApiResponse\SingleDocument;
+use PHPUnit\Framework\TestCase;
 
-class SingleDocumentSimpleTest extends \PHPUnit_Framework_TestCase
+class SingleDocumentSimpleTest extends TestCase
 {
     public function testFromArray()
     {
